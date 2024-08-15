@@ -35,7 +35,7 @@ function buscarEnderecoPorCep() {
                 }
             });
     } else {
-        alert('CEP inválido!!! O CEP deve ter pelo menos 8 dígitos.');
+        alert('CEP inválido! O CEP deve ter pelo menos 8 dígitos.');
     }
 }
 
@@ -122,12 +122,12 @@ function validarCamposObrigatorios() {
     });
 
     if (!produtoAdicionado) {
-        alert('ATENÇÃO!!! Pelo menos um produto deve ser adicionado.');
+        alert('ATENÇÃO! Pelo menos um produto deve ser adicionado.');
         return false;
     }
 
     if (!anexoAdicionado) {
-        alert('ATENÇÃO!!! Pelo menos um documento deve ser anexado.');
+        alert('ATENÇÃO! Pelo menos um documento deve ser anexado.');
         return false;
     }
 
@@ -212,7 +212,7 @@ function incluirAnexo() {
         var blobURL = URL.createObjectURL(blob);
 
         sessionStorage.setItem('documentoBlobURL_' + nomearquivo, blobURL);
-        alert('Seu documento foi anexado com sucesso!!!');
+        alert('Seu documento foi anexado com sucesso!');
 
         var novalinha = $("<tr>").addClass("anexo");
         var linha = "";
