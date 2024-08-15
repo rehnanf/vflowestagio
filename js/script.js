@@ -166,19 +166,20 @@ function salvarFornecedor() {
         contato: document.getElementById('contato').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
-        produtos: Array.from(document.querySelectorAll('#tabela_produtos .produto')).map(function (row) {
+        produtos: Array.from(document.querySelectorAll('#tabela_produtos .produto')).map(function (row, index) {
             return {
-                descricaoProduto: row.querySelector('#produto').value,
-                unidadeMedida: row.querySelector('#unidade_medida').value,
-                qtdeEstoque: row.querySelector('#quantidade').value,
-                valorUnitario: row.querySelector('#valor_unitario').value,
-                valorTotal: row.querySelector('#valor_total').value
+                descricaoProduto: row.querySelector(`#produto${index + 1}`).value,
+                unidadeMedida: row.querySelector(`#unidade_medida${index + 1}`).value,
+                qtdeEstoque: row.querySelector(`#quantidade${index + 1}`).value,
+                valorUnitario: row.querySelector(`#valor_unitario${index + 1}`).value,
+                valorTotal: row.querySelector(`#valor_total${index + 1}`).value
             };
         }),
-        anexos: Array.from(document.querySelectorAll('#tabela_anexos .anexo')).map(function (row) {
+        anexos: Array.from(document.querySelectorAll('#tabela_anexos .anexo')).map(function (row, index) {
+            const nomeArquivo = row.querySelector('label.text-sm').textContent;
             return {
-                nomeArquivo: row.querySelector('label.text-sm').textContent,
-                blobArquivo: sessionStorage.getItem('documentoBlobURL_' + row.querySelector('label.text-sm').textContent) || ''
+                nomeArquivo: nomeArquivo,
+                blobArquivo: sessionStorage.getItem(`documentoBlobURL_${nomeArquivo}`) || ''
             };
         })
     };
