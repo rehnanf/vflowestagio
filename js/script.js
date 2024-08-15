@@ -299,10 +299,3 @@ function visualizarDocumento(button) {
 }
 
 document.getElementById('btnSalvarFornecedor').addEventListener('click', salvarFornecedor);
-
-function excluirAnexo(botao) {
-    const linha = botao.closest('tr');
-    linha.remove();
-    sessionStorage.removeItem('documentoBlobURL');
-    alert('Anexo excluído com sucesso!');
-}
