@@ -1,10 +1,3 @@
-function calcularTotal() {
-    const valorUnitario = document.querySelector("#valor_unitario").value;
-    const quantidade = document.querySelector("#quantidade").value;
-    const total = (valorUnitario * quantidade).toFixed(2);
-    document.querySelector("#valor_total").value = total;
-}
-
 function removerProduto(button) {
     const linha = button.closest('tr');
     linha.remove();
@@ -48,13 +41,14 @@ function buscarEnderecoPorCep() {
 
 function adicionarProduto() {
     const tabela = document.querySelector("#tabela_produtos tbody");
-    const numProdutos = tabela.querySelectorAll("tr.produto").length + 1; // Contabiliza o número de produtos já na tabela
+    const numProdutos = tabela.querySelectorAll("tr.produto").length + 1;
     const novaLinha = document.createElement("tr");
     novaLinha.classList.add("produto");
 
     novaLinha.innerHTML = `
         <td class="text-center align-middle">
             <button onclick="removerProduto(this)" class="btn btn-danger">
+                <!-- Ícone de lixeira -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" fill="currentColor" class="bi bi-trash3" viewBox="0 0 17 16">
                     <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"></path>
                 </svg>
@@ -62,7 +56,7 @@ function adicionarProduto() {
         </td>
         <td>
             <div class="border rounded border-dark p-2">
-                <h5>Produto ${numProdutos}</h5> <!-- Nome do produto atualizado -->
+                <h5>Produto ${numProdutos}</h5>
                 <div class="row mt-3 mb-3">
                     <div class="col-md-2 d-flex justify-content-center align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16" style="width: 80px; height: 80px;">
@@ -85,11 +79,11 @@ function adicionarProduto() {
                             </div>
                             <div class="col-md-3">
                                 <label for="quantidade${numProdutos}" style="font-size: 13px">QTDE em Estoque</label>
-                                <input type="number" class="form-control" id="quantidade${numProdutos}" name="quantidade${numProdutos}" min="0" required oninput="calcularTotal()">
+                                <input type="number" class="form-control" id="quantidade${numProdutos}" name="quantidade${numProdutos}" min="0" required oninput="calcularTotal(${numProdutos})">
                             </div>
                             <div class="col-md-3">
                                 <label for="valor_unitario${numProdutos}" style="font-size: 13px">Valor Unitário</label>
-                                <input type="number" class="form-control" id="valor_unitario${numProdutos}" name="valor_unitario${numProdutos}" min="0" step="0.01" required oninput="calcularTotal()">
+                                <input type="number" class="form-control" id="valor_unitario${numProdutos}" name="valor_unitario${numProdutos}" min="0" step="0.01" required oninput="calcularTotal(${numProdutos})">
                             </div>
                             <div class="col-md-3">
                                 <label for="valor_total${numProdutos}" style="font-size: 13px">Valor Total</label>
@@ -103,6 +97,15 @@ function adicionarProduto() {
     
     tabela.appendChild(novaLinha);
 }
+
+function calcularTotal(numProdutos) {
+    const quantidade = document.getElementById(`quantidade${numProdutos}`).value;
+    const valorUnitario = document.getElementById(`valor_unitario${numProdutos}`).value;
+    const valorTotal = document.getElementById(`valor_total${numProdutos}`);
+
+    valorTotal.value = (quantidade * valorUnitario).toFixed(2);
+}
+
 function validarCamposObrigatorios() {
     var camposObrigatorios = document.querySelectorAll('[required]');
     var camposNaoPreenchidos = [];
