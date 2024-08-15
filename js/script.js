@@ -1,5 +1,3 @@
-let nomeDoArquivo;
-
 function calcularTotal() {
     const valorUnitario = document.querySelector("#valor_unitario").value;
     const quantidade = document.querySelector("#quantidade").value;
