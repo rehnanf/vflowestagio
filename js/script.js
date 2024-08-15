@@ -48,6 +48,7 @@ function buscarEnderecoPorCep() {
 
 function adicionarProduto() {
     const tabela = document.querySelector("#tabela_produtos tbody");
+    const numProdutos = tabela.querySelectorAll("tr.produto").length + 1; // Contabiliza o número de produtos já na tabela
     const novaLinha = document.createElement("tr");
     novaLinha.classList.add("produto");
 
@@ -61,7 +62,7 @@ function adicionarProduto() {
         </td>
         <td>
             <div class="border rounded border-dark p-2">
-                <h5>Produto 1</h5>
+                <h5>Produto ${numProdutos}</h5> <!-- Nome do produto atualizado -->
                 <div class="row mt-3 mb-3">
                     <div class="col-md-2 d-flex justify-content-center align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16" style="width: 80px; height: 80px;">
@@ -69,12 +70,12 @@ function adicionarProduto() {
                         </svg>
                     </div>
                     <div class="col-md-10">
-                        <label for="produto" class="text-sm">Produto</label>
-                        <input type="text" class="form-control" id="produto" name="produto" required>
+                        <label for="produto${numProdutos}" class="text-sm">Produto</label>
+                        <input type="text" class="form-control" id="produto${numProdutos}" name="produto${numProdutos}" required>
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="unidade_medida" style="font-size: 13px">UND. Medida</label>
-                                <select class="form-control" id="unidade_medida" name="unidade_medida" required>
+                                <label for="unidade_medida${numProdutos}" style="font-size: 13px">UND. Medida</label>
+                                <select class="form-control" id="unidade_medida${numProdutos}" name="unidade_medida${numProdutos}" required>
                                     <option value="" selected></option>
                                     <option value="KG">KG</option>
                                     <option value="Unidade">Unidade</option>
@@ -83,16 +84,16 @@ function adicionarProduto() {
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label for="quantidade" style="font-size: 13px">QTDE em Estoque</label>
-                                <input type="number" class="form-control" id="quantidade" name="quantidade" min="0" required oninput="calcularTotal()">
+                                <label for="quantidade${numProdutos}" style="font-size: 13px">QTDE em Estoque</label>
+                                <input type="number" class="form-control" id="quantidade${numProdutos}" name="quantidade${numProdutos}" min="0" required oninput="calcularTotal()">
                             </div>
                             <div class="col-md-3">
-                                <label for="valor_unitario" style="font-size: 13px">Valor Unitário</label>
-                                <input type="number" class="form-control" id="valor_unitario" name="valor_unitario" min="0" step="0.01" required oninput="calcularTotal()">
+                                <label for="valor_unitario${numProdutos}" style="font-size: 13px">Valor Unitário</label>
+                                <input type="number" class="form-control" id="valor_unitario${numProdutos}" name="valor_unitario${numProdutos}" min="0" step="0.01" required oninput="calcularTotal()">
                             </div>
                             <div class="col-md-3">
-                                <label for="valor_total" style="font-size: 13px">Valor Total</label>
-                                <input type="number" class="form-control" id="valor_total" name="valor_total" readonly required>
+                                <label for="valor_total${numProdutos}" style="font-size: 13px">Valor Total</label>
+                                <input type="number" class="form-control" id="valor_total${numProdutos}" name="valor_total${numProdutos}" readonly required>
                             </div>
                         </div>
                     </div>
