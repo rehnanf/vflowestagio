@@ -1,12 +1,10 @@
 function removerProduto(button) {
     const linha = button.closest('tr');
-    linha.remove();
     document.querySelector("#incProd").style.display = 'block';
 
     const confirmar = confirm("Deseja realmente excluir este produto?");
     
     if (confirmar) {
-        const linha = button.closest('tr');
         linha.remove();
     }
 }
